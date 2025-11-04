@@ -13,12 +13,19 @@ const AppContext = createContext()
 
 // AppProvider component - wraps entire app to provide context to all children
 export function AppProvider({ children }) {
-  // State for Partner Directory filters
-  const [selectedCountry, setSelectedCountry] = useState("Belarus")
-  const [selectedCity, setSelectedCity] = useState("Mogilev")
+  // State for Partner Directory filters (stored as slugs)
+  const [selectedCountry, setSelectedCountry] = useState("belarus")
+  const [selectedCity, setSelectedCity] = useState("mogilev")
 
   // State for Partner Form submission success message
   const [formSubmitted, setFormSubmitted] = useState(false)
+
+  // State for active language
+  const [language, setLanguage] = useState("en")
+
+  const toggleLanguage = () => {
+    setLanguage((prev) => (prev === "en" ? "ru" : "en"))
+  }
 
   // Package all state into context value object
   const value = {
@@ -28,6 +35,9 @@ export function AppProvider({ children }) {
     setSelectedCity,
     formSubmitted,
     setFormSubmitted,
+    language,
+    setLanguage,
+    toggleLanguage,
   }
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>

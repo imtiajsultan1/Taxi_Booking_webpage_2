@@ -2,8 +2,13 @@
 
 import Lottie from "lottie-react"
 import mapPointer from "../assets/Map Location Pointer.json"
+import { useAppContext } from "../context/AppContext"
+import { translations } from "../lib/translations"
 
 export default function HeroSection() {
+  const { language, toggleLanguage } = useAppContext()
+  const t = translations[language].hero
+
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId)
     element?.scrollIntoView({ behavior: "smooth" })
@@ -18,28 +23,54 @@ export default function HeroSection() {
       </div>
 
       <div className="relative z-10 mx-auto flex min-h-[620px] max-w-6xl flex-col justify-center px-6">
+        <div className="mb-10 flex justify-end">
+          <button
+            type="button"
+            aria-label={t.languageToggleAria}
+            onClick={toggleLanguage}
+            className="flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-2 py-1 text-[11px] font-semibold uppercase tracking-[0.35em] text-white/70 transition hover:border-yellow-400/60 hover:text-white"
+          >
+            <span
+              className={`flex-1 rounded-full px-3 py-1 text-center transition-all duration-300 ease-out ${
+                language === "en"
+                  ? "bg-yellow-400 text-slate-900 shadow-[0_12px_30px_rgba(250,204,21,0.35)]"
+                  : "text-white/60"
+              }`}
+            >
+              EN
+            </span>
+            <span className="text-white/40">|</span>
+            <span
+              className={`flex-1 rounded-full px-3 py-1 text-center transition-all duration-300 ease-out ${
+                language === "ru"
+                  ? "bg-yellow-400 text-slate-900 shadow-[0_12px_30px_rgba(250,204,21,0.35)]"
+                  : "text-white/60"
+              }`}
+            >
+              RU
+            </span>
+          </button>
+        </div>
+
         <div className="grid gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
           <div className="space-y-10">
             <h1 className="max-w-2xl text-4xl font-semibold leading-tight text-white sm:text-5xl lg:text-6xl">
-              Powering Local Services, Everywhere.
+              {t.heading}
             </h1>
-            <p className="max-w-xl text-lg leading-relaxed text-white/80">
-              We connect people with nearby service providers - from rides and deliveries to local jobs - through our
-              network of independent partners.
-            </p>
+            <p className="max-w-xl text-lg leading-relaxed text-white/80">{t.subheading}</p>
 
             <div className="flex flex-col gap-4 sm:flex-row">
               <button
                 onClick={() => scrollToSection("partner-directory")}
                 className="rounded-full bg-yellow-400 px-8 py-3 text-base font-semibold text-black shadow-lg shadow-yellow-500/30 transition hover:-translate-y-0.5 hover:bg-yellow-300"
               >
-                Discover Services
+                {t.primaryCta}
               </button>
               <button
                 onClick={() => scrollToSection("partner-form")}
                 className="rounded-full border border-yellow-400/70 px-8 py-3 text-base font-semibold text-yellow-300 transition hover:-translate-y-0.5 hover:bg-yellow-300/10"
               >
-                Become a Partner
+                {t.secondaryCta}
               </button>
             </div>
           </div>

@@ -1,4 +1,10 @@
+﻿import { useAppContext } from "../context/AppContext"
+import { translations } from "../lib/translations"
+
 export default function Footer() {
+  const { language } = useAppContext()
+  const t = translations[language].footer
+
   return (
     <footer id="contact" className="relative overflow-hidden bg-slate-950 py-16 text-slate-100">
       <div className="pointer-events-none absolute inset-0">
@@ -6,39 +12,39 @@ export default function Footer() {
         <div className="absolute bottom-[-140px] right-[-160px] h-[360px] w-[360px] rounded-full bg-yellow-400/12 blur-[150px]" />
       </div>
 
-      <div className="relative mx-auto grid max-w-6xl gap-12 px-6 lg:grid-cols-[1.2fr_0.8fr]">
-        <div className="space-y-6">
-          <h2 className="text-2xl font-semibold text-white">Contact</h2>
-          <p className="text-sm text-slate-300">
-            Connect with our partner success team to explore opportunities, request a platform walkthrough, or plan
-            your launch in a new city.
-          </p>
+      <div className="relative mx-auto max-w-6xl px-6">
+        <div className="rounded-[32px] border border-white/10 bg-white/[0.04] p-10 shadow-[0_26px_70px_rgba(8,47,73,0.55)] backdrop-blur transition duration-300 hover:-translate-y-1 hover:border-yellow-400/40 hover:shadow-[0_34px_80px_rgba(250,204,21,0.35)]">
+          <div className="flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between">
+            <div className="max-w-xl space-y-5">
+              <h2 className="text-2xl font-semibold text-white">{t.heading}</h2>
+              <p className="text-sm text-slate-300">{t.body}</p>
           <div className="grid gap-3 text-sm text-slate-100">
-            <a href="mailto:support@yourdomain.com" className="font-semibold transition hover:text-yellow-300">
-              support@yourdomain.com
+            <a href={`mailto:${t.email}`} className="font-semibold transition hover:text-yellow-300">
+              {t.email}
             </a>
-            <span className="text-slate-300">Phone: +XXX XX XXX XXXX</span>
-            <span className="text-slate-300">Address: [Your HQ address]</span>
+                <span className="text-slate-300">{t.phone}</span>
+                <span className="text-slate-300">{t.address}</span>
+              </div>
+            </div>
+
+            <div className="space-y-4">
+              <h3 className="text-sm font-semibold uppercase tracking-[0.3em] text-white/60">{t.socialHeading}</h3>
+              <div className="flex flex-wrap gap-4 text-sm font-semibold text-white/80">
+                <a href="#" className="transition hover:text-yellow-300">
+                  LinkedIn
+                </a>
+                <a href="#" className="transition hover:text-yellow-300">
+                  X/Twitter
+                </a>
+                <a href="#" className="transition hover:text-yellow-300">
+                  Facebook
+                </a>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div className="space-y-6 rounded-[28px] border border-white/10 bg-white/[0.04] p-8 shadow-[0_26px_70px_rgba(8,47,73,0.55)] backdrop-blur">
-          <h3 className="text-sm font-semibold uppercase tracking-[0.3em] text-white/60">Stay Connected</h3>
-          <div className="grid gap-3 text-sm font-semibold text-white/80">
-            <a href="#" className="transition hover:text-yellow-300">
-              LinkedIn
-            </a>
-            <a href="#" className="transition hover:text-yellow-300">
-              X/Twitter
-            </a>
-            <a href="#" className="transition hover:text-yellow-300">
-              Facebook
-            </a>
-          </div>
-          <p className="text-xs text-slate-400">
-            © {new Date().getFullYear()} RideHub. All rights reserved. Powering local services everywhere.
-          </p>
-        </div>
+        <p className="mt-8 text-center text-xs text-slate-400">© {new Date().getFullYear()} {t.copyright}</p>
       </div>
     </footer>
   )
