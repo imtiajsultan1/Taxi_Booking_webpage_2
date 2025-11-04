@@ -48,43 +48,33 @@ export default function PartnerDirectory() {
         </div>
 
         <div className="grid gap-10 lg:grid-cols-[320px_1fr]">
-          <div className="rounded-[32px] border border-white/10 bg-white/[0.04] p-8 shadow-[0_30px_70px_rgba(15,23,42,0.55)] backdrop-blur">
+          <div className="rounded-[32px] border border-white/10 bg-white/[0.04] p-8 shadow-[0_30px_70px_rgba(15,23,42,0.55)] backdrop-blur transition duration-300 hover:-translate-y-1 hover:border-yellow-400/40 hover:shadow-[0_34px_80px_rgba(250,204,21,0.35)]">
             <div className="flex flex-col gap-8">
-              <div className="flex flex-col gap-3">
-                <label htmlFor="country" className="text-xs font-semibold uppercase tracking-[0.2em] text-white/60">
-                  Country
-                </label>
-                <select
-                  id="country"
-                  value={selectedCountry}
-                  onChange={handleCountryChange}
-                  className="rounded-2xl border border-white/10 bg-slate-900/70 px-4 py-3 text-sm font-semibold text-white shadow-[inset_0_0_0_1px_rgba(148,163,184,0.25)] focus:border-yellow-300/70 focus:outline-none focus:ring-2 focus:ring-yellow-400/30"
-                >
-                  {countries.map((country) => (
-                    <option key={country} value={country}>
-                      {country}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <div className="flex flex-col gap-3">
-                <label htmlFor="city" className="text-xs font-semibold uppercase tracking-[0.2em] text-white/60">
-                  City
-                </label>
-                <select
-                  id="city"
-                  value={selectedCity}
-                  onChange={(event) => setSelectedCity(event.target.value)}
-                  className="rounded-2xl border border-white/10 bg-slate-900/70 px-4 py-3 text-sm font-semibold text-white shadow-[inset_0_0_0_1px_rgba(148,163,184,0.25)] focus:border-yellow-300/70 focus:outline-none focus:ring-2 focus:ring-yellow-400/30"
-                >
-                  {cities.map((city) => (
-                    <option key={city} value={city}>
-                      {city}
-                    </option>
-                  ))}
-                </select>
-              </div>
+              {[
+                { id: "country", label: "Country", value: selectedCountry, onChange: handleCountryChange, options: countries },
+                { id: "city", label: "City", value: selectedCity, onChange: (event) => setSelectedCity(event.target.value), options: cities },
+              ].map(({ id, label, value, onChange, options }) => (
+                <div key={id} className="relative flex flex-col gap-3">
+                  <label htmlFor={id} className="text-xs font-semibold uppercase tracking-[0.2em] text-white/60">
+                    {label}
+                  </label>
+                  <div className="relative">
+                    <select
+                      id={id}
+                      value={value}
+                      onChange={onChange}
+                      className="select-dark"
+                    >
+                      {options.map((option) => (
+                        <option key={option} value={option}>
+                          {option}
+                        </option>
+                      ))}
+                    </select>
+                    <span className="pointer-events-none absolute right-5 top-1/2 -translate-y-1/2 text-white/50">▾</span>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
 

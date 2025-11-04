@@ -3,14 +3,13 @@
 import { useState } from "react"
 import { useAppContext } from "../context/AppContext"
 
+const countries = ["Belarus"]
 const serviceCategories = [
   "Ride-sharing",
   "Delivery",
   "Local services",
   "Advertising / Promotions",
 ]
-
-const countries = ["Belarus"]
 
 export default function PartnerForm() {
   const { formSubmitted, setFormSubmitted } = useAppContext()
@@ -21,7 +20,7 @@ export default function PartnerForm() {
     address: "",
     country: countries[0],
     city: "",
-    services: [],
+    serviceCategory: serviceCategories[0],
     message: "",
   })
 
@@ -31,17 +30,6 @@ export default function PartnerForm() {
       ...previous,
       [name]: value,
     }))
-  }
-
-  const handleServiceToggle = (service) => {
-    setFormData((previous) => {
-      const alreadySelected = previous.services.includes(service)
-      const updatedServices = alreadySelected
-        ? previous.services.filter((item) => item !== service)
-        : [...previous.services, service]
-
-      return { ...previous, services: updatedServices }
-    })
   }
 
   const handleSubmit = (event) => {
@@ -57,7 +45,7 @@ export default function PartnerForm() {
       address: "",
       country: countries[0],
       city: "",
-      services: [],
+      serviceCategory: serviceCategories[0],
       message: "",
     })
   }
@@ -148,19 +136,22 @@ export default function PartnerForm() {
               <label htmlFor="country" className="text-xs font-semibold uppercase tracking-[0.2em] text-white/60">
                 Country
               </label>
-              <select
-                id="country"
-                name="country"
-                value={formData.country}
-                onChange={handleChange}
-                className="rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-sm font-semibold text-white shadow-inner focus:border-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-300/40"
-              >
-                {countries.map((country) => (
-                  <option key={country} value={country} className="text-slate-900">
-                    {country}
-                  </option>
-                ))}
-              </select>
+              <div className="relative">
+                <select
+                  id="country"
+                  name="country"
+                  value={formData.country}
+                  onChange={handleChange}
+                  className="select-dark"
+                >
+                  {countries.map((country) => (
+                    <option key={country} value={country} className="text-slate-900">
+                      {country}
+                    </option>
+                  ))}
+                </select>
+                <span className="pointer-events-none absolute right-5 top-1/2 -translate-y-1/2 text-white/50">▾</span>
+              </div>
             </div>
 
             <div className="flex flex-col gap-2">
@@ -179,26 +170,25 @@ export default function PartnerForm() {
             </div>
           </div>
 
-          <div className="flex flex-col gap-4">
-            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-white/60">Service Category</span>
-            <div className="grid gap-4 sm:grid-cols-2">
-              {serviceCategories.map((service) => {
-                const checked = formData.services.includes(service)
-                return (
-                  <label
-                    key={service}
-                    className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/10 px-4 py-4 text-sm font-semibold text-white transition hover:border-yellow-400/40"
-                  >
-                    <input
-                      type="checkbox"
-                      checked={checked}
-                      onChange={() => handleServiceToggle(service)}
-                      className="h-4 w-4 accent-yellow-400"
-                    />
+          <div className="flex flex-col gap-2">
+            <label htmlFor="serviceCategory" className="text-xs font-semibold uppercase tracking-[0.2em] text-white/60">
+              Service Category
+            </label>
+            <div className="relative">
+              <select
+                id="serviceCategory"
+                name="serviceCategory"
+                value={formData.serviceCategory}
+                onChange={handleChange}
+                className="select-dark"
+              >
+                {serviceCategories.map((service) => (
+                  <option key={service} value={service} className="text-slate-900">
                     {service}
-                  </label>
-                )
-              })}
+                  </option>
+                ))}
+              </select>
+              <span className="pointer-events-none absolute right-5 top-1/2 -translate-y-1/2 text-white/50">▾</span>
             </div>
           </div>
 

@@ -1,5 +1,8 @@
 "use client"
 
+import Lottie from "lottie-react"
+import mapPointer from "../assets/Map Location Pointer.json"
+
 export default function HeroSection() {
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId)
@@ -42,13 +45,9 @@ export default function HeroSection() {
           </div>
 
           <div className="hidden h-full w-full place-items-center lg:grid">
-            <div className="relative flex h-[360px] w-[360px] items-center justify-center rounded-[32px] border border-white/10 bg-white/[0.04] backdrop-blur-xl">
-              <div className="absolute inset-8 rounded-[28px] border border-yellow-400/30 bg-gradient-to-br from-yellow-400/10 via-transparent to-yellow-400/5 shadow-[0_0_80px_rgba(250,204,21,0.25)]" />
-              <div className="relative flex h-[140px] w-[140px] items-center justify-center rounded-full bg-yellow-400/80 shadow-[0_0_45px_rgba(250,204,21,0.35)]">
-                <div className="absolute h-[200px] w-[200px] animate-ping rounded-full border border-yellow-400/40" />
-                <div className="absolute h-[260px] w-[260px] animate-ping rounded-full border border-yellow-400/30 delay-150" />
-                <div className="absolute h-[320px] w-[320px] animate-ping rounded-full border border-yellow-400/20 delay-300" />
-              </div>
+            <div className="relative flex h-[380px] w-[380px] items-center justify-center rounded-[32px] border border-white/10 bg-white/[0.04] backdrop-blur-xl">
+              <div className="absolute inset-10 rounded-[28px] border border-yellow-400/30 bg-gradient-to-br from-yellow-400/10 via-transparent to-yellow-400/5 shadow-[0_0_80px_rgba(250,204,21,0.25)]" />
+              <Lottie animationData={mapPointer} loop autoplay className="relative h-[260px] w-[260px]" />
             </div>
           </div>
         </div>
