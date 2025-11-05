@@ -1,5 +1,13 @@
 export const translations = {
   en: {
+    nav: {
+      items: [
+        { id: "consumers", label: "For Consumers" },
+        { id: "business", label: "For Business" },
+        { id: "careers", label: "Careers" },
+        { id: "blog", label: "Blog" },
+      ],
+    },
     hero: {
       heading: "Powering Local Services, Everywhere.",
       subheading:
@@ -106,6 +114,14 @@ export const translations = {
     },
   },
   ru: {
+    nav: {
+      items: [
+        { id: "consumers", label: "Для клиентов" },
+        { id: "business", label: "Для бизнеса" },
+        { id: "careers", label: "Карьера" },
+        { id: "blog", label: "Блог" },
+      ],
+    },
     hero: {
       heading: "Развиваем локальные сервисы по всему миру.",
       subheading:

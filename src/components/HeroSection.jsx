@@ -1,12 +1,13 @@
-"use client"
+﻿"use client"
 
 import Lottie from "lottie-react"
 import mapPointer from "../assets/Map Location Pointer.json"
+import worldMap from "../assets/worldMap.json"
 import { useAppContext } from "../context/AppContext"
 import { translations } from "../lib/translations"
 
 export default function HeroSection() {
-  const { language, toggleLanguage } = useAppContext()
+  const { language } = useAppContext()
   const t = translations[language].hero
 
   const scrollToSection = (sectionId) => {
@@ -15,43 +16,15 @@ export default function HeroSection() {
   }
 
   return (
-    <section id="home" className="relative overflow-hidden py-32">
+    <section id="home" className="relative overflow-hidden pt-40 pb-32">
       <div className="absolute inset-0">
+        <Lottie animationData={worldMap} autoplay loop className="pointer-events-none absolute inset-0 opacity-35 mix-blend-screen" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(15,23,42,0.6),_rgba(2,6,23,0.95))]" />
         <div className="absolute -top-24 left-1/2 h-[720px] w-[720px] -translate-x-1/2 rounded-full bg-yellow-400/10 blur-3xl" />
         <div className="absolute bottom-[-240px] right-[-160px] h-[560px] w-[560px] rounded-full bg-emerald-400/10 blur-3xl" />
       </div>
 
       <div className="relative z-10 mx-auto flex min-h-[620px] max-w-6xl flex-col justify-center px-6">
-        <div className="mb-10 flex justify-end">
-          <button
-            type="button"
-            aria-label={t.languageToggleAria}
-            onClick={toggleLanguage}
-            className="flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-2 py-1 text-[11px] font-semibold uppercase tracking-[0.35em] text-white/70 transition hover:border-yellow-400/60 hover:text-white"
-          >
-            <span
-              className={`flex-1 rounded-full px-3 py-1 text-center transition-all duration-300 ease-out ${
-                language === "en"
-                  ? "bg-yellow-400 text-slate-900 shadow-[0_12px_30px_rgba(250,204,21,0.35)]"
-                  : "text-white/60"
-              }`}
-            >
-              EN
-            </span>
-            <span className="text-white/40">|</span>
-            <span
-              className={`flex-1 rounded-full px-3 py-1 text-center transition-all duration-300 ease-out ${
-                language === "ru"
-                  ? "bg-yellow-400 text-slate-900 shadow-[0_12px_30px_rgba(250,204,21,0.35)]"
-                  : "text-white/60"
-              }`}
-            >
-              RU
-            </span>
-          </button>
-        </div>
-
         <div className="grid gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
           <div className="space-y-10">
             <h1 className="max-w-2xl text-4xl font-semibold leading-tight text-white sm:text-5xl lg:text-6xl">
@@ -86,3 +59,5 @@ export default function HeroSection() {
     </section>
   )
 }
+
+

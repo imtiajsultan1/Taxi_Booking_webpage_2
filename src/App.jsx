@@ -5,6 +5,7 @@
 */
 
 import { AppProvider } from "./context/AppContext"
+import NavBar from "./components/NavBar"
 import HeroSection from "./components/HeroSection"
 import AboutSection from "./components/AboutSection"
 import PartnerDirectory from "./components/PartnerDirectory"
@@ -23,6 +24,7 @@ function App() {
         </div>
 
         <main className="relative flex flex-col gap-0">
+          <NavBar />
           <HeroSection />
           <AboutSection />
           <PartnerDirectory />
